@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Rohit Kumar | Complete Web Development Project</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Segoe UI,Arial,sans-serif;background:#080b18;color:#fff;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+:root{--cyan:#22d3ee;--purple:#8b5cf6;--pink:#ec4899;--dark:#080b18;--card:rgba(255,255,255,.07);--border:rgba(255,255,255,.12)}
+.container{width:min(1150px,92%);margin:auto}
+.gradient{background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));-webkit-background-clip:text;color:transparent}
+.glass{background:var(--card);backdrop-filter:blur(15px);border:1px solid var(--border)}
+section{padding:90px 0}
+
+body:before,body:after{content:"";position:fixed;width:450px;height:450px;border-radius:50%;filter:blur(160px);opacity:.12;z-index:-2}
+body:before{background:var(--cyan);top:-150px;left:-150px}
+body:after{background:var(--purple);bottom:-150px;right:-150px}
+
+.navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(8,11,24,.9);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+.nav-inner{width:min(1150px,92%);height:70px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:900}
+.logo span{color:#fff}
+.nav-links{display:flex;gap:25px;list-style:none;font-weight:600}
+.nav-links a{transition:.3s}
+.nav-links a:hover{color:var(--cyan)}
+.menu-btn{display:none;background:none;border:1px solid var(--border);color:#fff;border-radius:8px;padding:7px 11px;font-size:22px;cursor:pointer}
+
+.hero{min-height:100vh;padding-top:120px;display:flex;align-items:center;background:linear-gradient(135deg,#080b18,#17113d,#321047)}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center}
+.hero small{color:var(--cyan);font-weight:800;letter-spacing:3px}
+.hero h1{font-size:clamp(45px,7vw,75px);line-height:1.05;margin:20px 0}
+.hero h2{font-size:clamp(22px,4vw,38px);margin-bottom:20px}
+.hero p{color:#b9c4d0;font-size:18px;max-width:650px}
+.buttons{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:none;padding:13px 24px;border-radius:30px;font-weight:800;cursor:pointer;transition:.3s}
+.btn:hover{transform:translateY(-3px)}
+.primary{background:linear-gradient(135deg,var(--cyan),#0077ff);color:#fff;box-shadow:0 10px 30px rgba(34,211,238,.2)}
+.secondary{background:transparent;border:1px solid #405064;color:#fff}
+.secondary:hover{background:#fff;color:#111}
+
+.profile{display:flex;justify-content:center}
+.profile-ring{width:330px;height:330px;padding:4px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink));animation:float 4s ease-in-out infinite}
+.profile-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;background:#080b18}
+.profile img{width:100%;height:100%;object-fit:cover}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.section-title{text-align:center;margin-bottom:50px}
+.section-title span{color:var(--cyan);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:13px}
+.section-title h2{font-size:42px;margin:8px 0}
+.section-title p{color:#9aa8b5}
+
+.about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:25px}
+.about-card{padding:35px;border-radius:25px}
+.about-card h3{font-size:25px;margin-bottom:15px}
+.about-card p{color:#b9c4d0;margin-bottom:15px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.stat{padding:25px;text-align:center;border-radius:20px}
+.stat i{font-size:35px;color:var(--cyan)}
+.stat h3{margin-top:8px}
+.stat p{color:#9aa8b5}
+
+.skills{background:#0d1124}
+.skill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.skill{padding:25px;text-align:center;border-radius:20px;transition:.3s}
+.skill:hover{transform:translateY(-8px);border-color:var(--cyan)}
+.skill i{font-size:40px;color:var(--cyan)}
+.skill h3{margin-top:10px}
+
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.project{overflow:hidden;border-radius:22px;transition:.3s}
+.project:hover{transform:translateY(-8px)}
+.project-image{height:180px;display:flex;align-items:center;justify-content:center;font-size:60px;background:linear-gradient(135deg,#151d3b,#321047)}
+.project-content{padding:25px}
+.project-content h3{font-size:21px}
+.project-content p{color:#9aa8b5;margin:8px 0 18px}
+.project-link{color:var(--cyan);font-weight:800}
+
+.learning{background:#0d1124}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feature{padding:28px;border-radius:20px}
+.feature-icon{font-size:35px;margin-bottom:12px}
+.feature p{color:#9aa8b5}
+
+.quiz-box,.api-box,.todo-box,.contact-box,.products-box{padding:35px;border-radius:25px}
+.quiz-box{max-width:850px;margin:auto}
+.quiz-top{display:flex;justify-content:space-between;color:#9aa8b5;margin-bottom:15px}
+.progress-bg{height:8px;background:#1c3040;border-radius:20px;overflow:hidden;margin-bottom:30px}
+.progress{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:.4s}
+.question{font-size:24px;font-weight:800;margin-bottom:20px}
+.options{display:grid;gap:12px}
+.option{padding:15px 18px;border:1px solid #33495a;border-radius:12px;background:rgba(255,255,255,.04);color:#fff;text-align:left;cursor:pointer;transition:.3s}
+.option:hover{border-color:var(--cyan);transform:translateX(5px)}
+.option.correct{background:rgba(34,197,94,.15);border-color:#22c55e}
+.option.wrong{background:rgba(239,68,68,.15);border-color:#ef4444}
+.quiz-result{margin:18px 0;font-weight:800}
+
+.api-box{text-align:center;max-width:850px;margin:auto}
+.joke{min-height:130px;margin:25px 0;padding:30px;border-radius:18px;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;color:#dce7ed;font-size:18px}
+
+.todo-section{background:#111936}
+.todo-box{background:#fff;color:#111}
+.todo-input{display:flex;gap:10px}
+.todo-input input{flex:1}
+.form-input{width:100%;padding:14px;border:1px solid #d9e0e5;border-radius:11px;outline:none;background:#f8fafc;color:#111}
+.form-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(139,92,246,.12)}
+.add-btn{padding:0 22px;border:none;border-radius:11px;background:linear-gradient(135deg,#8b5cf6,#4f46e5);color:#fff;font-weight:800;cursor:pointer}
+.todo-controls{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+.filter{padding:8px 15px;border:1px solid #ddd;border-radius:20px;background:#f4f4f5;cursor:pointer}
+.filter.active{background:#7c3aed;color:#fff;border-color:#7c3aed}
+.task-list{display:grid;gap:10px}
+.task{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;background:#f5f6f8;border:1px solid #e1e4e7}
+.task-text{flex:1;color:#222}
+.task.done .task-text{text-decoration:line-through;color:#999}
+.task button{border:none;background:none;cursor:pointer;font-size:19px}
+.check{color:#16a34a}
+.edit{color:#2563eb}
+.delete{color:#ef4444}
+.todo-footer{display:flex;justify-content:space-between;margin-top:18px;color:#666;font-size:14px}
+.clear{border:none;background:none;color:#ef4444;font-weight:700;cursor:pointer}
+
+.products{background:#080b18}
+.product-controls{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;margin-bottom:25px}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.product{background:#fff;color:#111;padding:22px;border-radius:20px;transition:.3s}
+.product:hover{transform:translateY(-7px)}
+.product-icon{text-align:center;font-size:55px;margin-bottom:10px}
+.category{font-size:11px;text-transform:uppercase;color:#7c3aed;font-weight:800}
+.product h3{margin:5px 0}
+.rating{color:#f59e0b}
+.price{font-size:20px;font-weight:900;margin-top:8px}
+
+.contact{background:linear-gradient(180deg,#111936,#080b18)}
+.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:25px}
+.contact-info{padding:35px;border-radius:25px;background:linear-gradient(135deg,#7c3aed,#4f46e5)}
+.contact-info h3{font-size:30px;margin-bottom:12px}
+.contact-info p{color:#ddd;margin-bottom:25px}
+.contact-item{display:flex;gap:12px;margin:20px 0}
+.contact-item i{font-size:25px}
+.form-card{padding:35px;border-radius:25px;background:#fff;color:#111}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:13px;font-weight:800}
+textarea{min-height:130px;resize:vertical}
+.error{display:none;color:#dc2626;font-size:12px;font-weight:700}
+.invalid{border-color:#ef4444!important;background:#fff5f5}
+.valid{border-color:#16a34a!important;background:#f5fff9}
+.checkbox{display:flex;gap:8px;align-items:flex-start;font-size:13px}
+.submit{width:100%;margin-top:15px}
+.success{display:none;margin-top:12px;padding:12px;border-radius:10px;background:#dcfce7;color:#15803d;text-align:center;font-weight:700}
+
+.top-btn{display:none;position:fixed;right:25px;bottom:25px;width:50px;height:50px;border:none;border-radius:50%;background:var(--cyan);color:#06131a;font-size:22px;font-weight:900;cursor:pointer;z-index:900}
+.top-btn.show{display:block}
+.toast{position:fixed;right:20px;top:85px;background:#fff;color:#111;padding:14px 20px;border-radius:12px;box-shadow:0 15px 35px rgba(0,0,0,.3);display:none;z-index:2000;font-weight:700}
+.toast.show{display:block;animation:toast .3s ease}
+@keyframes toast{from{transform:translateX(30px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+footer{text-align:center;padding:35px;border-top:1px solid var(--border);color:#82909c}
+footer strong{color:var(--cyan)}
+
+.reveal{opacity:0;transform:translateY(30px)}
+
+@media(max-width:1000px){
+.skill-grid{grid-template-columns:repeat(3,1fr)}
+.projects{grid-template-columns:repeat(2,1fr)}
+.product-grid{grid-template-columns:repeat(3,1fr)}
+.product-controls{grid-template-columns:1fr 1fr}
+}
+@media(max-width:800px){
+.nav-links{display:none;position:absolute;top:70px;left:0;width:100%;background:#080b18;padding:20px;flex-direction:column}
+.nav-links.open{display:flex}
+.menu-btn{display:block}
+.hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+.profile{order:-1}
+.feature-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+section{padding:65px 0}
+.hero{text-align:center}
+.hero p{font-size:16px}
+.buttons{justify-content:center}
+.profile-ring{width:260px;height:260px}
+.skill-grid,.projects,.feature-grid,.product-grid{grid-template-columns:1fr}
+.product-controls,.form-grid{grid-template-columns:1fr}
+.form-group.full{grid-column:auto}
+.todo-input{flex-direction:column}
+.add-btn{height:50px}
+.todo-footer{flex-direction:column;gap:10px}
+.section-title h2{font-size:32px}
+.quiz-box,.api-box,.todo-box,.form-card,.contact-info{padding:24px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="toast" id="toast"></div>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="#home" class="logo gradient">Rohit<span> Kumar</span></a>
+
+<ul class="nav-links" id="navLinks">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#learning">Learning</a></li>
+<li><a href="#quiz">Quiz</a></li>
+<li><a href="#todo">To-Do</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+<button class="menu-btn" id="menuBtn">
+<i class="ri-menu-line"></i>
+</button>
+</div>
+</nav>
+
+<section class="hero" id="home">
+<div class="container hero-grid">
+
+<div id="heroText">
+<small>FULL STACK FRONT-END PROJECT</small>
+
+<h1>Hi, I'm <span class="gradient">Rohit Kumar</span></h1>
+
+<h2><span id="typing"></span></h2>
+
+<p>
+A complete interactive web application combining HTML, CSS,
+JavaScript, responsive design, DOM manipulation, LocalStorage,
+API integration, form validation, filtering and sorting.
+</p>
+
+<div class="buttons">
+<a href="#projects" class="btn primary">View Projects</a>
+<a href="#contact" class="btn secondary">Contact Me</a>
+<a href="#todo" class="btn secondary">Try To-Do</a>
+</div>
+</div>
+
+<div class="profile" id="heroIcon">
+<div class="profile-ring">
+<div class="profile-inner">
+<img src="./rohitPhoto.jpeg" alt="Rohit Kumar"
+onerror="this.src='https://ui-avatars.com/api/?name=Rohit+Kumar&background=111936&color=22d3ee&size=500'">
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<div class="section-title">
+<span>Introduction</span>
+<h2>About Me</h2>
+<p>Frontend development and interactive web applications</p>
+</div>
+
+<div class="about-grid">
+
+<div class="about-card glass reveal">
+<h3>Frontend Developer</h3>
+
+<p>
+I am passionate about designing and developing responsive websites
+and interactive web applications.
+</p>
+
+<p>
+My projects demonstrate practical skills in HTML, CSS, JavaScript,
+responsive design, LocalStorage, filtering, sorting and interactive UI.
+</p>
+
+<p>
+This single application brings the separate learning projects together
+into one complete web development project.
+</p>
+</div>
+
+<div class="stats reveal">
+
+<div class="stat glass">
+<i class="ri-code-s-slash-line"></i>
+<h3>HTML</h3>
+<p>Structure</p>
+</div>
+
+<div class="stat glass">
+<i class="ri-css3-line"></i>
+<h3>CSS</h3>
+<p>Design</p>
+</div>
+
+<div class="stat glass">
+<i class="ri-javascript-line"></i>
+<h3>JavaScript</h3>
+<p>Interaction</p>
+</div>
+
+<div class="stat glass">
+<i class="ri-responsive-line"></i>
+<h3>Responsive</h3>
+<p>All Devices</p>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="skills" id="skills">
+<div class="container">
+
+<div class="section-title">
+<span>My Toolkit</span>
+<h2>Skills</h2>
+<p>Technologies used throughout the projects</p>
+</div>
+
+<div class="skill-grid">
+
+<div class="skill glass"><i class="ri-html5-line"></i><h3>HTML5</h3></div>
+<div class="skill glass"><i class="ri-css3-line"></i><h3>CSS3</h3></div>
+<div class="skill glass"><i class="ri-javascript-line"></i><h3>JavaScript</h3></div>
+<div class="skill glass"><i class="ri-layout-grid-line"></i><h3>CSS Grid</h3></div>
+<div class="skill glass"><i class="ri-layout-column-line"></i><h3>Flexbox</h3></div>
+<div class="skill glass"><i class="ri-smartphone-line"></i><h3>Responsive</h3></div>
+<div class="skill glass"><i class="ri-database-2-line"></i><h3>LocalStorage</h3></div>
+<div class="skill glass"><i class="ri-cloud-line"></i><h3>Fetch API</h3></div>
+<div class="skill glass"><i class="ri-tailwind-css-line"></i><h3>Tailwind</h3></div>
+<div class="skill glass"><i class="ri-bootstrap-line"></i><h3>Bootstrap</h3></div>
+<div class="skill glass"><i class="ri-flashlight-line"></i><h3>GSAP</h3></div>
+<div class="skill glass"><i class="ri-git-branch-line"></i><h3>GitHub</h3></div>
+
+</div>
+</div>
+</section>
+
+<section id="projects">
+<div class="container">
+
+<div class="section-title">
+<span>My Work</span>
+<h2>Projects</h2>
+<p>Projects completed during web development practice</p>
+</div>
+
+<div class="projects">
+
+<div class="project glass">
+<div class="project-image">🙏</div>
+<div class="project-content">
+<h3>BhaktiMarg</h3>
+<p>Responsive web project.</p>
+<a class="project-link" href="https://rohit7257.github.io/BhaktiMarg/" target="_blank">Visit Website →</a>
+</div>
+</div>
+
+<div class="project glass">
+<div class="project-image">🍔</div>
+<div class="project-content">
+<h3>Burger Kings</h3>
+<p>Restaurant website.</p>
+<a class="project-link" href="https://rohit7257.github.io/burgerkings/" target="_blank">Visit Website →</a>
+</div>
+</div>
+
+<div class="project glass">
+<div class="project-image">🌱</div>
+<div class="project-content">
+<h3>Bonsai</h3>
+<p>Modern responsive website.</p>
+<a class="project-link" href="https://rohit7257.github.io/Bonsai/" target="_blank">Visit Website →</a>
+</div>
+</div>
+
+<div class="project glass">
+<div class="project-image">🐶</div>
+<div class="project-content">
+<h3>Veterinary</h3>
+<p>Professional service website.</p>
+<a class="project-link" href="https://rohit7257.github.io/veterinary/" target="_blank">Visit Website →</a>
+</div>
+</div>
+
+<div class="project glass">
+<div class="project-image">⚡</div>
+<div class="project-content">
+<h3>Pulse</h3>
+<p>Creative web project.</p>
+<a class="project-link" href="https://rohit7257.github.io/pulse_website/" target="_blank">Visit Website →</a>
+</div>
+</div>
+
+<div class="project glass">
+<div class="project-image">💻</div>
+<div class="project-content">
+<h3>DevLabs</h3>
+<p>Developer website.</p>
+<a class="project-link" href="https://rohit7257.github.io/devlabs/" target="_blank">Visit Website →</a>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="learning" id="learning">
+<div class="container">
+
+<div class="section-title">
+<span>Four Projects Combined</span>
+<h2>Complete Web Development Skills</h2>
+<p>Everything integrated into one application</p>
+</div>
+
+<div class="feature-grid">
+
+<div class="feature glass reveal">
+<div class="feature-icon">📝</div>
+<h3>HTML & CSS Forms</h3>
+<p>Structured forms with inputs, select, radio, checkbox and textarea.</p>
+</div>
+
+<div class="feature glass reveal">
+<div class="feature-icon">✓</div>
+<h3>JavaScript Validation</h3>
+<p>Email, phone, message and required-field validation.</p>
+</div>
+
+<div class="feature glass reveal">
+<div class="feature-icon">📱</div>
+<h3>Responsive Design</h3>
+<p>Flexbox, Grid and media queries for mobile, tablet and desktop.</p>
+</div>
+
+<div class="feature glass reveal">
+<div class="feature-icon">⚡</div>
+<h3>DOM Manipulation</h3>
+<p>JavaScript dynamically creates and updates application content.</p>
+</div>
+
+<div class="feature glass reveal">
+<div class="feature-icon">💾</div>
+<h3>LocalStorage</h3>
+<p>Tasks remain saved even after refreshing the browser.</p>
+</div>
+
+<div class="feature glass reveal">
+<div class="feature-icon">🌐</div>
+<h3>API Integration</h3>
+<p>Fetch real-time information from a public API.</p>
+</div>
+
+<div class="feature glass reveal">
+<div class="feature-icon">🔎</div>
+<h3>Search & Filter</h3>
+<p>Search products and filter them by category and price.</p>
+</div>
+
+<div class="feature glass reveal">
+<div class="feature-icon">↕️</div>
+<h3>Sorting</h3>
+<p>Sort products by price and customer rating.</p>
+</div>
+
+<div class="feature glass reveal">
+<div class="feature-icon">🎨</div>
+<h3>Modern UI</h3>
+<p>Glassmorphism cards, gradients, animations and interactive effects.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="quiz">
+<div class="container">
+
+<div class="section-title">
+<span>Interactive Challenge</span>
+<h2>JavaScript Quiz 🧠</h2>
+<p>Test your HTML, CSS and JavaScript knowledge</p>
+</div>
+
+<div class="quiz-box glass">
+
+<div class="quiz-top">
+<span id="questionNumber">Question 1 of 5</span>
+<span id="score">Score: 0</span>
+</div>
+
+<div class="progress-bg">
+<div class="progress" id="progress"></div>
+</div>
+
+<div class="question" id="question"></div>
+<div class="options" id="options"></div>
+<div class="quiz-result" id="quizResult"></div>
+
+<button class="btn primary" id="nextBtn" style="display:none">
+Next Question →
+</button>
+
+</div>
+</div>
+</section>
+
+<section id="api">
+<div class="container">
+
+<div class="section-title">
+<span>Fetch API</span>
+<h2>Real-Time API Data 🌐</h2>
+<p>Fetch a random programming joke</p>
+</div>
+
+<div class="api-box glass">
+
+<div style="font-size:55px">🌐</div>
+
+<div class="joke" id="joke">
+Click the button to fetch API data.
+</div>
+
+<button class="btn primary" onclick="getJoke()">
+✨ Fetch Random Joke
+</button>
+
+</div>
+</div>
+</section>
+
+<section class="todo-section" id="todo">
+<div class="container">
+
+<div class="section-title">
+<span>DOM + LocalStorage</span>
+<h2>To-Do List</h2>
+<p>Manage your tasks and save them automatically</p>
+</div>
+
+<div class="todo-box">
+
+<div class="todo-input">
+<input id="taskInput" class="form-input" placeholder="Enter your task...">
+<button class="add-btn" onclick="addTask()">+ Add Task</button>
+</div>
+
+<div class="todo-controls">
+<button class="filter active" onclick="setTaskFilter('all',this)">All</button>
+<button class="filter" onclick="setTaskFilter('active',this)">Active</button>
+<button class="filter" onclick="setTaskFilter('completed',this)">Completed</button>
+</div>
+
+<div class="task-list" id="tasks"></div>
+
+<div class="todo-footer">
+<span id="taskCount">0 active tasks</span>
+<button class="clear" onclick="clearCompleted()">Clear Completed</button>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="products" id="products">
+<div class="container">
+
+<div class="section-title">
+<span>Interactive Product Listing</span>
+<h2>Products</h2>
+<p>Search, filter and sort products</p>
+</div>
+
+<div class="products-box glass">
+
+<div class="product-controls">
+
+<input id="searchProduct" class="form-input" placeholder="🔍 Search product">
+
+<select id="categoryFilter" class="form-input">
+<option value="all">All Categories</option>
+<option value="electronics">Electronics</option>
+<option value="fashion">Fashion</option>
+<option value="books">Books</option>
+</select>
+
+<input id="maxPrice" type="number" class="form-input" placeholder="Maximum Price">
+
+<select id="sortProducts" class="form-input">
+<option value="default">Sort Products</option>
+<option value="low">Price: Low to High</option>
+<option value="high">Price: High to Low</option>
+<option value="rating">Highest Rating</option>
+</select>
+
+</div>
+
+<div class="product-grid" id="productList"></div>
+
+</div>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="container">
+
+<div class="section-title">
+<span>Get In Touch</span>
+<h2>Contact Me</h2>
+<p>JavaScript validated contact form</p>
+</div>
+
+<div class="contact-grid">
+
+<div class="contact-info">
+<h3>Let's Connect</h3>
+<p>
+Have a question, project idea or feedback?
+Send me a message.
+</p>
+
+<div class="contact-item">
+<i class="ri-mail-line"></i>
+<div>
+<small>Email</small>
+<strong>mypc7257@gmail.com</strong>
+</div>
+</div>
+
+<div class="contact-item">
+<i class="ri-linkedin-box-line"></i>
+<div>
+<small>LinkedIn</small>
+<strong>Rohit Kumar</strong>
+</div>
+</div>
+
+<div class="contact-item">
+<i class="ri-github-line"></i>
+<div>
+<small>GitHub</small>
+<strong>rohit7257</strong>
+</div>
+</div>
+</div>
+
+<div class="form-card">
+
+<form id="contactForm">
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Name *</label>
+<input id="name" class="form-input" placeholder="Your name">
+<span class="error" id="nameError">Name is required.</span>
+</div>
+
+<div class="form-group">
+<label>Email *</label>
+<input id="email" type="email" class="form-input" placeholder="your@email.com">
+<span class="error" id="emailError">Enter a valid email.</span>
+</div>
+
+<div class="form-group">
+<label>Phone *</label>
+<input id="phone" class="form-input" placeholder="10 digit number">
+<span class="error" id="phoneError">Enter a valid phone number.</span>
+</div>
+
+<div class="form-group">
+<label>Subject</label>
+<select id="subject" class="form-input">
+<option>Project Discussion</option>
+<option>Web Development</option>
+<option>Feedback</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Message *</label>
+<textarea id="message" class="form-input" placeholder="Write your message..."></textarea>
+<span class="error" id="messageError">Message must contain at least 10 characters.</span>
+</div>
+
+<div class="form-group full">
+<label class="checkbox">
+<input type="checkbox" id="terms">
+<span>I agree to the terms and conditions.</span>
+</label>
+<span class="error" id="termsError">Please accept the terms.</span>
+</div>
+
+</div>
+
+<button class="btn primary submit" type="submit">
+<i class="ri-send-plane-fill"></i>&nbsp; Send Message
+</button>
+
+<div class="success" id="success">
+✓ Message validated successfully!
+</div>
+
+</form>
+</div>
+
+</div>
+</div>
+</section>
+
+<footer>
+<p>Designed & Developed by <strong>Rohit Kumar</strong></p>
+<p>HTML • CSS • JavaScript • Responsive Design • LocalStorage • API • DOM • GSAP</p>
+<p>© 2026 Rohit Kumar | Complete Web Development Project</p>
+</footer>
+
+<button class="top-btn" id="topBtn">↑</button>
+
+<script>
+const menuBtn=document.getElementById("menuBtn");
+const navLinks=document.getElementById("navLinks");
+
+menuBtn.onclick=()=>{
+navLinks.classList.toggle("open");
+menuBtn.innerHTML=navLinks.classList.contains("open")
+?'<i class="ri-close-line"></i>'
+:'<i class="ri-menu-line"></i>';
+};
+
+navLinks.querySelectorAll("a").forEach(link=>{
+link.onclick=()=>{
+navLinks.classList.remove("open");
+menuBtn.innerHTML='<i class="ri-menu-line"></i>';
+};
+});
+
+const words=[
+"Frontend Web Developer",
+"JavaScript Developer",
+"Responsive Web Designer",
+"Creative Developer"
+];
+
+let wordIndex=0,charIndex=0,deleting=false;
+
+function typeText(){
+const word=words[wordIndex];
+
+document.getElementById("typing").textContent=
+deleting
+?word.substring(0,charIndex--)
+:word.substring(0,charIndex++);
+
+if(!deleting&&charIndex===word.length+1){
+deleting=true;
+setTimeout(typeText,1000);
+return;
+}
+
+if(deleting&&charIndex===0){
+deleting=false;
+wordIndex=(wordIndex+1)%words.length;
+}
+
+setTimeout(typeText,deleting?60:100);
+}
+
+typeText();
+
+if(typeof gsap!=="undefined"){
+gsap.from("#heroText",{x:-80,opacity:0,duration:1,ease:"power3.out"});
+gsap.from("#heroIcon",{scale:0,rotation:180,opacity:0,duration:1.3,ease:"back.out"});
+}
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.style.opacity="1";
+entry.target.style.transform="translateY(0)";
+}
+});
+},{threshold:.12});
+
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+function showToast(message){
+const toast=document.getElementById("toast");
+toast.textContent=message;
+toast.classList.add("show");
+setTimeout(()=>toast.classList.remove("show"),2200);
+}
+
+const questions=[
+{
+question:"Which language is used to make webpages interactive?",
+options:["HTML","CSS","JavaScript","SQL"],
+answer:"JavaScript"
+},
+{
+question:"Which CSS feature is used for responsive design?",
+options:["Media Queries","Variables","Animations","Selectors"],
+answer:"Media Queries"
+},
+{
+question:"Which method is commonly used to fetch API data?",
+options:["fetch()","getData()","apiRequest()","loadAPI()"],
+answer:"fetch()"
+},
+{
+question:"Which symbol represents an ID selector in CSS?",
+options:[".","#","*","@"],
+answer:"#"
+},
+{
+question:"Which HTML tag creates a hyperlink?",
+options:["<link>","<a>","<href>","<url>"],
+answer:"<a>"
+}
+];
+
+let currentQuestion=0;
+let score=0;
+
+function loadQuestion(){
+const q=questions[currentQuestion];
+
+document.getElementById("question").textContent=q.question;
+document.getElementById("questionNumber").textContent=
+`Question ${currentQuestion+1} of ${questions.length}`;
+
+document.getElementById("score").textContent=`Score: ${score}`;
+
+document.getElementById("progress").style.width=
+`${((currentQuestion+1)/questions.length)*100}%`;
+
+const options=document.getElementById("options");
+options.innerHTML="";
+
+document.getElementById("quizResult").textContent="";
+document.getElementById("nextBtn").style.display="none";
+
+q.options.forEach(option=>{
+const button=document.createElement("button");
+button.className="option";
+button.textContent=option;
+button.onclick=()=>checkAnswer(option,button);
+options.appendChild(button);
+});
+}
+
+function checkAnswer(selected,clicked){
+const correct=questions[currentQuestion].answer;
+const buttons=document.querySelectorAll(".option");
+
+buttons.forEach(button=>{
+button.disabled=true;
+if(button.textContent===correct)
+button.classList.add("correct");
+});
+
+if(selected===correct){
+score++;
+clicked.classList.add("correct");
+document.getElementById("quizResult").textContent="🎉 Correct Answer!";
+}else{
+clicked.classList.add("wrong");
+document.getElementById("quizResult").textContent=
+`❌ Wrong Answer! Correct answer: ${correct}`;
+}
+
+document.getElementById("score").textContent=`Score: ${score}`;
+document.getElementById("nextBtn").style.display="inline-flex";
+}
+
+document.getElementById("nextBtn").onclick=()=>{
+currentQuestion++;
+
+if(currentQuestion<questions.length){
+loadQuestion();
+}else{
+showFinalResult();
+}
+};
+
+function showFinalResult(){
+const percentage=Math.round(score/questions.length*100);
+
+document.getElementById("question").textContent="🎉 Quiz Completed!";
+
+document.getElementById("options").innerHTML=`
+<div style="text-align:center;padding:30px;background:rgba(34,211,238,.08);border-radius:18px">
+<div style="font-size:55px">🏆</div>
+<h2>${score}/${questions.length}</h2>
+<p>You scored ${percentage}%</p>
+</div>`;
+
+document.getElementById("quizResult").textContent=
+percentage>=80
+?"🔥 Excellent Work!"
+:percentage>=50
+?"👍 Good Job!"
+:"💪 Keep Practicing!";
+
+const btn=document.getElementById("nextBtn");
+btn.textContent="Restart Quiz";
+btn.onclick=restartQuiz;
+}
+
+function restartQuiz(){
+currentQuestion=0;
+score=0;
+
+const btn=document.getElementById("nextBtn");
+btn.textContent="Next Question";
+btn.onclick=()=>{
+currentQuestion++;
+currentQuestion<questions.length?loadQuestion():showFinalResult();
+};
+
+loadQuestion();
+}
+
+loadQuestion();
+
+async function getJoke(){
+const joke=document.getElementById("joke");
+
+joke.innerHTML="⏳ Fetching API data...";
+
+try{
+const response=await fetch("https://official-joke-api.appspot.com/random_joke");
+
+if(!response.ok)throw new Error();
+
+const data=await response.json();
+
+joke.innerHTML=`
+<div>
+<strong>${data.setup}</strong>
+<br><br>
+<span>😂 ${data.punchline}</span>
+</div>`;
+}catch(error){
+joke.textContent="❌ Unable to fetch API data. Please try again.";
+}
+}
+
+let tasks=JSON.parse(localStorage.getItem("rohitTasks"))||[];
+let taskFilter="all";
+
+function saveTasks(){
+localStorage.setItem("rohitTasks",JSON.stringify(tasks));
+}
+
+function escapeHTML(text){
+const div=document.createElement("div");
+div.textContent=text;
+return div.innerHTML;
+}
+
+function addTask(){
+const input=document.getElementById("taskInput");
+const text=input.value.trim();
+
+if(!text){
+showToast("Please enter a task");
+return;
+}
+
+tasks.unshift({
+id:Date.now(),
+text:text,
+done:false
+});
+
+saveTasks();
+showTasks();
+
+input.value="";
+showToast("Task added successfully ✓");
+}
+
+function showTasks(){
+const box=document.getElementById("tasks");
+
+const filtered=tasks.filter(task=>{
+if(taskFilter==="active")return !task.done;
+if(taskFilter==="completed")return task.done;
+return true;
+});
+
+if(!filtered.length){
+box.innerHTML=`
+<div style="text-align:center;padding:30px;color:#888">
+<i class="ri-task-line" style="font-size:35px"></i>
+<p>No tasks found</p>
+</div>`;
+}else{
+box.innerHTML=filtered.map(task=>`
+<div class="task ${task.done?"done":""}">
+<button class="check" onclick="toggleTask(${task.id})">
+${task.done?"✓":"○"}
+</button>
+
+<span class="task-text">${escapeHTML(task.text)}</span>
+
+<button class="edit" onclick="editTask(${task.id})">
+<i class="ri-edit-line"></i>
+</button>
+
+<button class="delete" onclick="deleteTask(${task.id})">
+<i class="ri-delete-bin-line"></i>
+</button>
+</div>
+`).join("");
+}
+
+const active=tasks.filter(t=>!t.done).length;
+
+document.getElementById("taskCount").textContent=
+`${active} active task${active===1?"":"s"}`;
+}
+
+function toggleTask(id){
+const task=tasks.find(t=>t.id===id);
+
+if(task)task.done=!task.done;
+
+saveTasks();
+showTasks();
+}
+
+function editTask(id){
+const task=tasks.find(t=>t.id===id);
+
+if(!task)return;
+
+const value=prompt("Edit your task:",task.text);
+
+if(value&&value.trim()){
+task.text=value.trim();
+saveTasks();
+showTasks();
+showToast("Task updated ✓");
+}
+}
+
+function deleteTask(id){
+tasks=tasks.filter(task=>task.id!==id);
+saveTasks();
+showTasks();
+showToast("Task deleted");
+}
+
+function setTaskFilter(filter,button){
+taskFilter=filter;
+
+document.querySelectorAll(".filter").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+showTasks();
+}
+
+function clearCompleted(){
+tasks=tasks.filter(task=>!task.done);
+saveTasks();
+showTasks();
+showToast("Completed tasks cleared");
+}
+
+document.getElementById("taskInput").addEventListener("keydown",e=>{
+if(e.key==="Enter")addTask();
+});
+
+showTasks();
+
+const products=[
+{name:"Smart Watch",category:"electronics",price:2499,rating:4.7,icon:"⌚"},
+{name:"Wireless Headphones",category:"electronics",price:1999,rating:4.8,icon:"🎧"},
+{name:"Bluetooth Speaker",category:"electronics",price:1499,rating:4.5,icon:"🔊"},
+{name:"Smartphone",category:"electronics",price:15999,rating:4.9,icon:"📱"},
+{name:"Running Shoes",category:"fashion",price:1799,rating:4.4,icon:"👟"},
+{name:"T-Shirt",category:"fashion",price:799,rating:4.2,icon:"👕"},
+{name:"Denim Jacket",category:"fashion",price:2299,rating:4.6,icon:"🧥"},
+{name:"Backpack",category:"fashion",price:1299,rating:4.3,icon:"🎒"},
+{name:"JavaScript Book",category:"books",price:599,rating:4.9,icon:"📘"},
+{name:"Web Design Book",category:"books",price:699,rating:4.7,icon:"📚"},
+{name:"CSS Guide",category:"books",price:499,rating:4.5,icon:"📖"},
+{name:"HTML Handbook",category:"books",price:449,rating:4.6,icon:"📕"}
+];
+
+function renderProducts(){
+
+const search=document.getElementById("searchProduct").value.toLowerCase();
+const category=document.getElementById("categoryFilter").value;
+const max=parseFloat(document.getElementById("maxPrice").value);
+const sort=document.getElementById("sortProducts").value;
+
+let result=products.filter(product=>
+product.name.toLowerCase().includes(search)&&
+(category==="all"||product.category===category)&&
+(isNaN(max)||product.price<=max)
+);
+
+if(sort==="low")result.sort((a,b)=>a.price-b.price);
+if(sort==="high")result.sort((a,b)=>b.price-a.price);
+if(sort==="rating")result.sort((a,b)=>b.rating-a.rating);
+
+const list=document.getElementById("productList");
+
+if(!result.length){
+list.innerHTML=`
+<div style="grid-column:1/-1;text-align:center;padding:50px">
+<div style="font-size:50px">🔍</div>
+<h3>No Products Found</h3>
+<p style="color:#aaa">Try another search or filter.</p>
+</div>`;
+return;
+}
+
+list.innerHTML=result.map(product=>`
+<div class="product">
+<div class="product-icon">${product.icon}</div>
+<div class="category">${product.category}</div>
+<h3>${product.name}</h3>
+<div class="rating">★ ${product.rating}</div>
+<div class="price">₹${product.price.toLocaleString("en-IN")}</div>
+</div>
+`).join("");
+}
+
+["searchProduct","categoryFilter","maxPrice","sortProducts"].forEach(id=>{
+document.getElementById(id).addEventListener("input",renderProducts);
+document.getElementById(id).addEventListener("change",renderProducts);
+});
+
+renderProducts();
+
+const form=document.getElementById("contactForm");
+
+function setError(id,errorId,message){
+
+const field=document.getElementById(id);
+const error=document.getElementById(errorId);
+
+if(message){
+field.classList.add("invalid");
+field.classList.remove("valid");
+error.textContent=message;
+error.style.display="block";
+return false;
+}
+
+field.classList.remove("invalid");
+field.classList.add("valid");
+error.style.display="none";
+return true;
+}
+
+form.addEventListener("submit",e=>{
+
+e.preventDefault();
+
+const name=document.getElementById("name").value.trim();
+const email=document.getElementById("email").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const message=document.getElementById("message").value.trim();
+const terms=document.getElementById("terms").checked;
+
+let valid=true;
+
+if(name.length<2){
+setError("name","nameError","Please enter your name.");
+valid=false;
+}else{
+setError("name","nameError","");
+}
+
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+setError("email","emailError","Enter a valid email.");
+valid=false;
+}else{
+setError("email","emailError","");
+}
+
+if(!/^[0-9]{10}$/.test(phone)){
+setError("phone","phoneError","Enter a valid 10 digit phone number.");
+valid=false;
+}else{
+setError("phone","phoneError","");
+}
+
+if(message.length<10){
+setError("message","messageError","Message must contain at least 10 characters.");
+valid=false;
+}else{
+setError("message","messageError","");
+}
+
+const termsError=document.getElementById("termsError");
+
+if(!terms){
+termsError.style.display="block";
+valid=false;
+}else{
+termsError.style.display="none";
+}
+
+if(valid){
+
+document.getElementById("success").style.display="block";
+
+form.reset();
+
+document.querySelectorAll(".valid").forEach(el=>{
+el.classList.remove("valid");
+});
+
+showToast("Form submitted successfully ✓");
+
+setTimeout(()=>{
+document.getElementById("success").style.display="none";
+},4000);
+}
+});
+
+const topBtn=document.getElementById("topBtn");
+
+window.addEventListener("scroll",()=>{
+if(window.scrollY>500)
+topBtn.classList.add("show");
+else
+topBtn.classList.remove("show");
+});
+
+topBtn.onclick=()=>{
+window.scrollTo({top:0,behavior:"smooth"});
+};
+
+window.addEventListener("resize",()=>{
+if(window.innerWidth>800){
+navLinks.classList.remove("open");
+menuBtn.innerHTML='<i class="ri-menu-line"></i>';
+}
+});
+</script>
+
+</body>
+</html>
